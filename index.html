@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 800;
+            text-align: center;
+            color: #8577ff;
+        }
+
+        body {
+            background-color: #FFD9B7;
+        }
+
+        h1 {
+            margin: 10px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        p {
+            margin: 10px;
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: #ff7b71;
+            color: black;
+            cursor: pointer;
+            font-size: 15px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .button2 {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: #99ff8c;
+            cursor: pointer;
+        }
+
+        img {
+            display: none;
+        }
+
+        section {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 150px;
+            margin-top:80px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>----------Dice-Game----------</h1>
+    <p>Click the button to roll the dice</p>
+    <div class="buttons">
+        <button class="button2" onclick="rollDice()">Roll the dice</button>
+        <button onclick="reset()">reset</button>
+    </div>
+    <p id="decision"></p>
+    <p id="values"></p>
+    <section class="main">
+        <div class="firstplayer">
+            <img src="images/dice1.png" alt="1" id="fpd1">
+            <img src="images/dice2.png" alt="2" id="fpd2">
+            <img src="images/dice3.png" alt="3" id="fpd3">
+            <img src="images/dice4.png" alt="4" id="fpd4">
+            <img src="images/dice5.png" alt="5" id="fpd5">
+            <img src="images/dice6.png" alt="6" id="fpd6">
+        </div>
+
+        <div class="secondplayer">
+            <img src="images/dice1.png" alt="1" id="spd1">
+            <img src="images/dice2.png" alt="2" id="spd2">
+            <img src="images/dice3.png" alt="3" id="spd3">
+            <img src="images/dice4.png" alt="4" id="spd4">
+            <img src="images/dice5.png" alt="5" id="spd5">
+            <img src="images/dice6.png" alt="6" id="spd6">
+        </div>
+    </section>
+
+    <!-- javascript for scripting -->
+    <script>
+        function rollDice() {
+    //clearing the previos outputs before printing new
+    for (var i = 1; i <= 6; i++) {
+        document.getElementById('fpd' + i).style.display = 'none';
+        document.getElementById('spd' + i).style.display = 'none';
+    }
+    // generating and assingning ramdom values to players 
+    var dice1 = Math.floor(Math.random() * 6) + 1;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
+    var player1 = dice1;
+    var player2 = dice2;
+    // printing values
+    document.getElementById('values').style.color = "darkgreen"
+    document.getElementById('values').innerHTML = "player 1 got " + player1 + " and" +" player 2 got " + player2;
+    //printing decision 
+    if(player1===player2){
+        document.getElementById('decision').style.fontFamily = "cursive"
+        document.getElementById('decision').style.color = "BLACK"
+        document.getElementById('decision').innerHTML = "IT'S A DRAW" 
+    }
+    else if (player1 > player2) {
+        document.getElementById('decision').style.fontFamily = "cursive"
+        document.getElementById('decision').style.color = "blue"
+        document.getElementById('decision').innerHTML = "PLAYER 1 WON"
+    }
+    else{
+        document.getElementById('decision').style.fontFamily = "cursive"
+        document.getElementById('decision').style.color = "red"
+        document.getElementById('decision').innerHTML = "PLAYER 2 WON"
+    }
+    // player 1
+    for (let i = 1; i <= player1; i++) {
+        if (player1 === i) {
+            document.getElementById('fpd' + i).style.display = 'block';
+        }
+    }
+
+    // player 2
+    for (let i = 1; i <= player2; i++) {
+        if (player2 === i) {
+            document.getElementById('spd' + i).style.display = 'block';
+        }
+    }
+
+}
+//resetting the game
+function reset() {
+    for (var i = 1; i <= 6; i++) {
+        document.getElementById('fpd' + i).style.display = 'none';
+        document.getElementById('spd' + i).style.display = 'none';
+    }
+    document.getElementById('decision').innerHTML = "";
+    document.getElementById('values').innerHTML = "";
+}
+    </script>
+</body>
+
+</html>
